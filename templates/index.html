@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fact-Checker</title>
+</head>
+<body>
+    <h1>Live Fact-Checker</h1>
+    <p>Enter a statement below:</p>
+    <input type="text" id="statement" placeholder="Type a statement...">
+    <button onclick="checkFact()">Check Fact</button>
+    <div id="result"></div>
+
+    <script>
+        function checkFact() {
+            let statement = document.getElementById("statement").value;
+            fetch('/fact-check', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ "statement": statement })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerHTML = `<h3>Truth Score: ${data['Truth Score']}%</h3><p>${data['Analysis']}</p><p>${data['Correction']}</p>`;
+            });
+        }
+    </script>
+</body>
+</html>
