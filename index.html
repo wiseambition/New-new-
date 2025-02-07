@@ -43,6 +43,10 @@
                     <p><strong>Analysis:</strong> ${data['Analysis']}</p>
                     <p><strong>Correction:</strong> ${data['Correction']}</p>
                 </div>`;
+            })
+            .catch(error => {
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("result").innerHTML = `<p style="color:red;">Error retrieving data. Please try again.</p>`;
             });
         }
     </script>
